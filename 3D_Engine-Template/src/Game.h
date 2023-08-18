@@ -4,8 +4,8 @@
 #include "SpriteComponent.h"
 #include "Window.h"
 #include "Vector2.h"
-#include "Astroid.h"
 #include "RendererOGL.h"
+#include "Camera.h"
 
 using std::vector;
 
@@ -24,7 +24,7 @@ public:
 	Game& operator=(Game&&) = delete;
 
 private:
-	Game() : isRunning(true), isUpdatingActors(false) {}
+	Game() : isRunning(true), isUpdatingActors(false), camera(nullptr) {}
 
 public:
 	bool initialize();
@@ -37,11 +37,6 @@ public:
 	void removeActor(Actor* actor);
 
 	RendererOGL& getRenderer() { return renderer; }
-
-	// Game specific
-	vector<Astroid*>& getAstroids();
-	void addAstroid(Astroid* astroid);
-	void removeAstroid(Astroid* astroid);
 
 private:
 	void processInput();
@@ -56,7 +51,7 @@ private:
 	vector<Actor*> actors;
 	vector<Actor*> pendingActors;
 
-	// Game specific
-	vector<Astroid*> astroids;
+	Camera* camera;
+
 };
 

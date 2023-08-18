@@ -4,7 +4,7 @@
 #include "Window.h"
 
 MoveComponent::MoveComponent(Actor* ownerP, int updateOrderP)
-	: Component(ownerP, updateOrderP), forwardSpeed(0.0f), angularSpeed(0.0f)
+	: Component(ownerP, updateOrderP), forwardSpeed(0.0f), angularSpeed(Vector2::zero)
 {
 
 }
@@ -14,28 +14,31 @@ void MoveComponent::setForwardSpeed(float forwardSpeedP)
 	forwardSpeed = forwardSpeedP;
 }
 
-void MoveComponent::setAngularSpeed(float angularSpeedP)
+void MoveComponent::setAngularSpeed(Vector2 angularSpeedP)
 {
 	angularSpeed = angularSpeedP;
 }
 
 void MoveComponent::update(float dt)
-{
-	if (!Maths::nearZero(angularSpeed))
+{	
+	
+	Vector2 angle = angularSpeed * dt;
+	if (!Maths::nearZero(angularSpeed.x))
+	{	
+		Quaternion newRotationX = owner.getRotation();
+		Quaternion incrementX(Vector3::unitX, angle.x);
+		newRotationX = Quaternion::concatenate(newRotationX, incrementX);
+		owner.setRotation(newRotationX);
+	}else
 	{
-		float newRotation = owner.getRotation() + angularSpeed * dt;
-		owner.setRotation(newRotation);
+		Quaternion newRotationY = owner.getRotation();
+		Quaternion incrementY(Vector3::unitY, angle.y);
+		newRotationY = Quaternion::concatenate(newRotationY, incrementY);
+		owner.setRotation(newRotationY);
 	}
 	if (!Maths::nearZero(forwardSpeed))
 	{
-		Vector2 newPosition = owner.getPosition() + owner.getForward() * forwardSpeed * dt;
-
-		// Screen wrapping (for asteroids)
-		if (newPosition.x < 0) { newPosition.x = WINDOW_WIDTH; }
-		else if (newPosition.x > WINDOW_WIDTH) { newPosition.x = 0; }
-		if (newPosition.y < 0) { newPosition.y = WINDOW_HEIGHT; }
-		else if (newPosition.y > WINDOW_HEIGHT) { newPosition.y = 0; }
-
+		Vector3 newPosition = owner.getPosition() + owner.getForward() * forwardSpeed * dt;
 		owner.setPosition(newPosition);
 	}
 }

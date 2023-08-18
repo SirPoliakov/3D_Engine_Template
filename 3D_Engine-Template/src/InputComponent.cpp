@@ -1,4 +1,5 @@
 #include "InputComponent.h"
+#include "Vector2.h"
 #include <SDL_scancode.h>
 
 InputComponent::InputComponent(Actor* ownerP) :
@@ -34,7 +35,7 @@ void InputComponent::processInput(const Uint8* keyState)
 	{
 		angularSpeed += maxAngularSpeed;
 	}
-	setAngularSpeed(angularSpeed);
+	setAngularSpeed(Vector2(angularSpeed,0.0f));
 }
 
 void InputComponent::setMaxForwardSpeed(float maxForwardSpeedP)

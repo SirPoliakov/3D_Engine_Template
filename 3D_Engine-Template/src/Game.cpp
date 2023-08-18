@@ -4,9 +4,8 @@
 #include "AnimSpriteComponent.h"
 #include "Timer.h"
 #include "Assets.h"
-#include "BackgroundSpriteComponent.h"
-#include "Astroid.h"
-#include "Ship.h"
+#include "MeshComponent.h"
+
 
 bool Game::initialize()
 {
@@ -17,70 +16,45 @@ bool Game::initialize()
 
 void Game::load()
 {
-	// Load textures
-	Assets::loadTexture(renderer, "Res\\Ship01.png", "Ship01");
-	Assets::loadTexture(renderer, "Res\\Ship02.png", "Ship02");
-	Assets::loadTexture(renderer, "Res\\Ship03.png", "Ship03");
-	Assets::loadTexture(renderer, "Res\\Ship04.png", "Ship04");
-	Assets::loadTexture(renderer, "Res\\Farback01.png", "Farback01");
-	Assets::loadTexture(renderer, "Res\\Farback02.png", "Farback02");
-	Assets::loadTexture(renderer, "Res\\Stars.png", "Stars");
-	Assets::loadTexture(renderer, "Res\\Astroid.png", "Astroid");
-	Assets::loadTexture(renderer, "Res\\Ship.png", "Ship");
-	Assets::loadTexture(renderer, "Res\\Laser.png", "Laser");
-
-	Assets::loadShader("Res\\Shaders\\Basic.vert", "Res\\Shaders\\Basic.frag", "", "", "", "Basic");
-	Assets::loadShader("Res\\Shaders\\Transform.vert", "Res\\Shaders\\Basic.frag", "", "", "", "Transform");
 	Assets::loadShader("Res\\Shaders\\Sprite.vert", "Res\\Shaders\\Sprite.frag", "", "", "", "Sprite");
+	Assets::loadShader("Res\\Shaders\\BasicMesh.vert", "Res\\Shaders\\BasicMesh.frag", "", "", "", "BasicMesh");
 
-	// Single sprite
-	/*
-	Actor* actor = new Actor();
-	SpriteComponent* sprite = new SpriteComponent(actor, Assets::getTexture("Ship01"));
-	actor->setPosition(Vector2{ 100, 100 });
-	*/
+	//Assets::loadTexture(renderer, "Res\\Textures\\Default.png", "Default");
+	Assets::loadTexture(renderer, "Res\\Textures\\Cube.png", "Cube");
+	//Assets::loadTexture(renderer, "Res\\Textures\\HealthBar.png", "HealthBar");
+	Assets::loadTexture(renderer, "Res\\Textures\\Plane.png", "Plane");
+	//Assets::loadTexture(renderer, "Res\\Textures\\Radar.png", "Radar");
+	Assets::loadTexture(renderer, "Res\\Textures\\Sphere.png", "Sphere");
 
-	// Animated sprite
-	/*
-	vector<Texture*> animTextures {
-		&Assets::getTexture("Ship01"),
-		&Assets::getTexture("Ship02"),
-		&Assets::getTexture("Ship03"),
-		&Assets::getTexture("Ship04"),
-	};
-	Actor* ship = new Actor();
-	AnimSpriteComponent* animatedSprite = new AnimSpriteComponent(ship, animTextures);
-	ship->setPosition(Vector2{ 100, 300 });
-	*/
+	Assets::loadMesh("Res\\Meshes\\Cube.gpmesh", "Mesh_Cube");
+	Assets::loadMesh("Res\\Meshes\\Plane.gpmesh", "Mesh_Plane");
+	Assets::loadMesh("Res\\Meshes\\Sphere.gpmesh", "Mesh_Sphere");
 
-	// Controlled ship
-	Ship* ship = new Ship();
-	ship->setPosition(Vector2{ 100, 300 });
-
-	// Background
-	// Create the "far back" background
-	vector<Texture*> bgTexsFar {
-		&Assets::getTexture("Farback01"),
-		&Assets::getTexture("Farback02")
-	};
-	Actor* bgFar = new Actor();
-	BackgroundSpriteComponent* bgSpritesFar = new BackgroundSpriteComponent(bgFar, bgTexsFar);
-	bgSpritesFar->setScrollSpeed(-100.0f);
-
-	// Create the closer background
-	Actor* bgClose = new Actor();
-	std::vector<Texture*> bgTexsClose {
-		&Assets::getTexture("Stars"),
-		&Assets::getTexture("Stars")
-	};
-	BackgroundSpriteComponent* bgSpritesClose = new BackgroundSpriteComponent(bgClose, bgTexsClose, 50);
-	bgSpritesClose->setScrollSpeed(-200.0f);
+	camera = new Camera();	
 	
-	const int astroidNumber = 20;
-	for (int i = 0; i < astroidNumber; ++i)
-	{
-		Astroid* a = new Astroid();
-	}
+	Actor* b = new Actor();
+	b->setPosition(Vector3(100.0f, -75.0f, 0.0f));
+	b->setScale(3.0f);
+	MeshComponent* mcb = new MeshComponent(b);
+	mcb->setMesh(Assets::getMesh("Mesh_Sphere"));
+
+
+	Actor* a = new Actor();
+	a->setPosition(Vector3(200.0f, 105.0f, 0.0f));
+	a->setScale(100.0f);
+	Quaternion q(Vector3::unitY, -Maths::piOver2);
+	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 4.0f));
+	a->setRotation(q);
+	MeshComponent* mc = new MeshComponent(a);
+	mc->setMesh(Assets::getMesh("Mesh_Cube"));
+
+
+	Actor* plane = new Actor();
+	plane->setPosition(Vector3(700, 0, 150.0f));
+	plane->setScale(3.0f);
+	MeshComponent* mcPlane = new MeshComponent(plane);
+	mcPlane->setMesh(Assets::getMesh("Mesh_Plane"));
+
 }
 
 void Game::processInput()
@@ -150,25 +124,6 @@ void Game::render()
 	renderer.beginDraw();
 	renderer.draw();
 	renderer.endDraw();
-}
-
-vector<Astroid*>& Game::getAstroids()
-{
-	return astroids;
-}
-
-void Game::addAstroid(Astroid* astroid)
-{
-	astroids.emplace_back(astroid);
-}
-
-void Game::removeAstroid(Astroid* astroid)
-{
-	auto iter = std::find(begin(astroids), end(astroids), astroid);
-	if (iter != astroids.end())
-	{
-		astroids.erase(iter);
-	}
 }
 
 void Game::loop()
