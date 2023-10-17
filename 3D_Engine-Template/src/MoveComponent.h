@@ -1,6 +1,6 @@
 #pragma once
 #include "Component.h"
-#include "Vector2.h"
+#include "Vector3.h"
 
 class MoveComponent : public Component
 {
@@ -10,17 +10,17 @@ public:
 	MoveComponent(const MoveComponent&) = delete;
 	MoveComponent& operator=(const MoveComponent&) = delete;
 
-	float getForwardSpeed() const { return forwardSpeed; }
-	Vector2 getAngularSpeed() const { return angularSpeed; }
-
-	void setForwardSpeed(float forwardSpeedP);
-	void setAngularSpeed(Vector2 angularSpeedP);
+	Vector3 getVelocity() const { return velocity; }
+	float getAngularSpeed() const { return angularSpeed; }
+	 
+	void setVelocity(Vector3 _velocity);
+	void setAngularSpeed(float _angularSpeed);
 
 	void update(float dt) override;
 
 
 private:
-	float forwardSpeed;
-	Vector2 angularSpeed;
+	Vector3 velocity;
+	float angularSpeed;
 };
 

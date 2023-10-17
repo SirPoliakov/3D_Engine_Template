@@ -20,37 +20,37 @@ void Camera::updateActor(float deltaTime)
 	getGame().getRenderer().setViewMatrix(view);
 }
 
-void Camera::actorInput(const Uint8* keys)
+void Camera::actorInput(const struct InputState& inputState)
 {
-	float forwardSpeed = 0.0f;
-	Vector2 angSpeed = Vector2(0.0f, 0.0f);
-	//MOVEMENT
+	Vector3 vel = Vector3::zero;
+	float angSpeed = 0.0f;
 
-	if (keys[SDL_SCANCODE_SPACE])
+	// MOVEMENTS
+	if (inputState.keyboard.getKeyValue(SDL_SCANCODE_W))
 	{
-		forwardSpeed += 300.0f;
+		vel.x += 300.0;
 	}
-	if (keys[SDL_SCANCODE_W])
+	if (inputState.keyboard.getKeyValue(SDL_SCANCODE_S))
 	{
-		angSpeed.y -= Maths::twoPi;
-		angSpeed.x = 0;
+		vel.x -= 300.0f;
 	}
-	if (keys[SDL_SCANCODE_S])
+	if (inputState.keyboard.getKeyValue(SDL_SCANCODE_A))
 	{
-		angSpeed.y += Maths::twoPi;
-		angSpeed.x = 0;
+		vel.y -= 180.0f;
 	}
-	if (keys[SDL_SCANCODE_A])
+	if (inputState.keyboard.getKeyValue(SDL_SCANCODE_D))
 	{
-		angSpeed.x += Maths::twoPi;
-		angSpeed.y = 0;
+		vel.y += 180.0f;
 	}
-	if (keys[SDL_SCANCODE_D])
+
+
+	// ROTATIONS
+	/*if (inputState.keyboard.getKeyValue(SDL_SCANCODE_))
 	{
 		angSpeed.x -= Maths::twoPi;
 		angSpeed.y = 0;
-	}
+	}*/
 
-	moveComponent->setForwardSpeed(forwardSpeed);
+	moveComponent->setVelocity(vel);
 	moveComponent->setAngularSpeed(angSpeed);
 }

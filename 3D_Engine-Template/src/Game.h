@@ -6,6 +6,7 @@
 #include "Vector2.h"
 #include "RendererOGL.h"
 #include "Camera.h"
+#include "InputSystem.h"
 
 using std::vector;
 
@@ -50,6 +51,7 @@ private:
 	bool isUpdatingActors;
 	vector<Actor*> actors;
 	vector<Actor*> pendingActors;
+	InputSystem inputSystem;
 
 	Camera* camera;
 
