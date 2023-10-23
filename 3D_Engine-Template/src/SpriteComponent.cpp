@@ -29,3 +29,8 @@ void SpriteComponent::draw(IRenderer& renderer)
 	renderer.drawSprite(owner, texture, Rectangle::nullRect, origin, IRenderer::Flip::None);
 }
 
+void SpriteComponent::setIsVisible(bool _IsVisible)
+{
+	isVisible = _IsVisible;
+}
+

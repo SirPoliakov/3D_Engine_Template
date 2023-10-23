@@ -17,6 +17,7 @@ public:
 	virtual void processInput(const struct InputState& inputState);
 	virtual void update(float dt);
 	virtual void onUpdateWorldTransform() {}
+	
 
 protected:
 	Actor& owner;

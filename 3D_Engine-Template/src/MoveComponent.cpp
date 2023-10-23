@@ -4,13 +4,13 @@
 #include "Window.h"
 
 MoveComponent::MoveComponent(Actor* ownerP, int updateOrderP)
-	: Component(ownerP, updateOrderP), velocity(Vector3::zero), angularSpeed(0.0f)
+	: Component(ownerP, updateOrderP), forwardSpeed(0.0f), angularSpeed(0.0f), strafeSpeed(0.0f)
 {
 }
 
-void MoveComponent::setVelocity(Vector3 _velocity)
+void MoveComponent::setForwardSpeed(float _forwardSpeed)
 {
-	velocity = _velocity;
+	forwardSpeed = _forwardSpeed;
 }
 
 void MoveComponent::setAngularSpeed(float _angularSpeed)
@@ -18,19 +18,38 @@ void MoveComponent::setAngularSpeed(float _angularSpeed)
 	angularSpeed = _angularSpeed;
 }
 
+void MoveComponent::setStrafeSpeed(float _strafeSpeed)
+{
+	strafeSpeed = _strafeSpeed;
+}
+
+/*void MoveComponent::updateGravity()
+{
+	float res = velocity.z + gravityScale;
+	if (Maths::abs(res) <= MAX_GRAV) velocity.z = res;
+	else if(res <0) velocity.z -= MAX_GRAV;
+	else velocity.z += MAX_GRAV;
+}*/
+
 void MoveComponent::update(float dt)
 {	
 	if (!Maths::nearZero(angularSpeed))
 	{
 		Quaternion newRotation = owner.getRotation();
+		
 		float angle = angularSpeed * dt;
-		Quaternion increment(Vector3::unitZ, angle);
-		newRotation = Quaternion::concatenate(newRotation, increment);
+		Quaternion incrementZ(Vector3::unitZ, angle);
+		newRotation = Quaternion::concatenate(newRotation, incrementZ);
 		owner.setRotation(newRotation);
 	}
-	if (!Maths::nearZero(velocity.length()))
+	//updateGravity();
+
+	if (!Maths::nearZero(forwardSpeed))
 	{
-		Vector3 newPosition = owner.getPosition() + velocity * dt;
+		
+		Vector3 newPosition = owner.getPosition();
+		newPosition += owner.getForward() * forwardSpeed * dt;
+		newPosition += owner.getRight() * strafeSpeed * dt;
 		owner.setPosition(newPosition);
 	}
 }

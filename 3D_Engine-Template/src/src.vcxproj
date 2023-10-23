@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -22,11 +22,13 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="AnimSpriteComponent.h" />
     <ClInclude Include="Assets.h" />
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CircleCollisionComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DirectionalLight.h" />
+    <ClInclude Include="FPSActor.h" />
+    <ClInclude Include="FPSCamera.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="IRenderer.h" />
@@ -36,6 +38,7 @@
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshComponent.h" />
+    <ClInclude Include="MouseState.h" />
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Quaternion.h" />
@@ -56,10 +59,12 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AnimSpriteComponent.cpp" />
     <ClCompile Include="Assets.cpp" />
-    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CircleCollisionComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="FPSActor.cpp" />
+    <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="KeyboardState.cpp" />
@@ -68,6 +73,7 @@
     <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshComponent.cpp" />
+    <ClCompile Include="MouseState.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Quaternion.cpp" />

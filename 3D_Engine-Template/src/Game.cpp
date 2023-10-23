@@ -5,6 +5,10 @@
 #include "Timer.h"
 #include "Assets.h"
 #include "MeshComponent.h"
+#include "FPSActor.h"
+#include "Cube.h"
+#include "Sphere.h"
+#include "Plane.h"
 
 
 bool Game::initialize()
@@ -22,40 +26,94 @@ void Game::load()
 	Assets::loadShader("Res\\Shaders\\BasicMesh.vert", "Res\\Shaders\\BasicMesh.frag", "", "", "", "BasicMesh");
 
 	//Assets::loadTexture(renderer, "Res\\Textures\\Default.png", "Default");
-	Assets::loadTexture(renderer, "Res\\Textures\\Cube.png", "Cube");
+	Assets::loadTexture(renderer, "Res\\Textures\\Default.png", "Cube");
 	//Assets::loadTexture(renderer, "Res\\Textures\\HealthBar.png", "HealthBar");
 	Assets::loadTexture(renderer, "Res\\Textures\\Plane.png", "Plane");
 	//Assets::loadTexture(renderer, "Res\\Textures\\Radar.png", "Radar");
 	Assets::loadTexture(renderer, "Res\\Textures\\Sphere.png", "Sphere");
+	Assets::loadTexture(renderer, "Res\\Textures\\Rifle.png", "Rifle");
+	Assets::loadTexture(renderer, "Res\\Textures\\Crosshair.png", "Crosshair");
 
 	Assets::loadMesh("Res\\Meshes\\Cube.gpmesh", "Mesh_Cube");
 	Assets::loadMesh("Res\\Meshes\\Plane.gpmesh", "Mesh_Plane");
 	Assets::loadMesh("Res\\Meshes\\Sphere.gpmesh", "Mesh_Sphere");
-
-	camera = new Camera();	
+	Assets::loadMesh("Res\\Meshes\\Rifle.gpmesh", "Mesh_Rifle");
 	
-	Actor* b = new Actor();
-	b->setPosition(Vector3(100.0f, -75.0f, 0.0f));
-	b->setScale(3.0f);
-	MeshComponent* mcb = new MeshComponent(b);
-	mcb->setMesh(Assets::getMesh("Mesh_Sphere"));
+	fps = new FPSActor();
 
-
-	Actor* a = new Actor();
+	Cube* a = new Cube();
 	a->setPosition(Vector3(200.0f, 105.0f, 0.0f));
 	a->setScale(100.0f);
 	Quaternion q(Vector3::unitY, -Maths::piOver2);
 	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 4.0f));
 	a->setRotation(q);
-	MeshComponent* mc = new MeshComponent(a);
-	mc->setMesh(Assets::getMesh("Mesh_Cube"));
 
+	Sphere* b = new Sphere();
+	b->setPosition(Vector3(200.0f, -75.0f, 0.0f));
+	b->setScale(3.0f);
 
-	Actor* plane = new Actor();
-	plane->setPosition(Vector3(700, 0, 150.0f));
-	plane->setScale(3.0f);
-	MeshComponent* mcPlane = new MeshComponent(plane);
-	mcPlane->setMesh(Assets::getMesh("Mesh_Plane"));
+	// Floor and walls
+
+	// Setup floor
+	const float start = -1250.0f;
+	const float size = 250.0f;
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			Plane* p = new Plane();
+			p->setPosition(Vector3(start + i * size, start + j * size, -100.0f));
+		}
+	}
+
+	// Left/right walls
+	q = Quaternion(Vector3::unitX, Maths::piOver2);
+	for (int i = 0; i < 10; i++)
+	{
+		Plane* p = new Plane();
+		p->setPosition(Vector3(start + i * size, start - size, 0.0f));
+		p->setRotation(q);
+
+		p = new Plane();
+		p->setPosition(Vector3(start + i * size, -start + size, 0.0f));
+		p->setRotation(q);
+	}
+
+	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::piOver2));
+	// Forward/back walls
+	for (int i = 0; i < 10; i++)
+	{
+		Plane* p = new Plane();
+		p->setPosition(Vector3(start - size, start + i * size, 0.0f));
+		p->setRotation(q);
+
+		p = new Plane();
+		p->setPosition(Vector3(-start + size, start + i * size, 0.0f));
+		p->setRotation(q);
+	}
+
+	/* Setup lights
+	renderer.setAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
+	DirectionalLight& dir = renderer.getDirectionalLight();
+	dir.direction = Vector3(0.0f, -0.707f, -0.707f);
+	dir.diffuseColor = Vector3(0.78f, 0.88f, 1.0f);
+	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
+
+	// Create spheres with audio components playing different sounds
+	Sphere* soundSphere = new Sphere();
+	soundSphere->setPosition(Vector3(500.0f, -75.0f, 0.0f));
+	soundSphere->setScale(1.0f);
+	AudioComponent* ac = new AudioComponent(soundSphere);
+	ac->playEvent("event:/FireLoop");
+	*/
+
+	// Corsshair
+	Actor* crosshairActor = new Actor();
+	crosshairActor->setScale(2.0f);
+	crosshair = new SpriteComponent(crosshairActor, Assets::getTexture("Crosshair"));
+
+	// Start music
+	//musicEvent = audioSystem.playEvent("event:/Music");
 
 }
 
@@ -67,12 +125,7 @@ void Game::processInput()
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
-		switch (event.type)
-		{
-		case SDL_QUIT:
-			isRunning = false;
-			break;
-		}
+		isRunning = inputSystem.processEvent(event);
 	}
 
 	inputSystem.update();
