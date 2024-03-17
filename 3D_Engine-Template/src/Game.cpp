@@ -10,6 +10,7 @@
 #include "Car.h"
 #include "Sphere.h"
 #include "Plane.h"
+#include <algorithm>
 
 
 bool Game::initialize()
