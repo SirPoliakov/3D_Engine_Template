@@ -44,7 +44,7 @@ void MoveComponent::update(float dt)
 	}
 	//updateGravity();
 
-	if (!Maths::nearZero(forwardSpeed))
+	if (!Maths::nearZero(forwardSpeed) || (!Maths::nearZero(strafeSpeed)))
 	{
 		
 		Vector3 newPosition = owner.getPosition();

@@ -28,8 +28,10 @@ void FPSCamera::update(float dt)
 
 void FPSCamera::setPitchSpeed(float _PitchSpeed)
 {
+	pitchSpeed = _PitchSpeed;
 }
 
 void FPSCamera::setMaxPitch(float _MaxPitch)
 {
+	maxPitch = _MaxPitch;
 }
