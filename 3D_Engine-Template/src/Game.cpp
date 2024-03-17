@@ -9,6 +9,7 @@
 #include "Cube.h"
 #include "Sphere.h"
 #include "Plane.h"
+#include <algorithm>
 
 
 bool Game::initialize()
