@@ -16,9 +16,9 @@ public:
 
 private:
 	class MoveComponent* moveComponent;
-	class MeshComponent* meshComponent;
+	class MeshComponent* mesh1Component;
 	class FPSCamera* cameraComponent;
 	class Actor* FPSModel;
 };
 
-const Vector3 MODEL_OFFSET = Vector3(10.0f, 10.0f, -10.0f);
+const Vector3 MODEL_OFFSET = Vector3(10.0f, 35.0f, -15.0f);

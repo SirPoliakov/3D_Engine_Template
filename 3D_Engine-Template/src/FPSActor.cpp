@@ -8,7 +8,7 @@
 FPSActor::FPSActor() :
 	Actor(),
 	moveComponent(nullptr),
-	meshComponent(nullptr),
+	mesh1Component(nullptr),
 	cameraComponent(nullptr)
 {
 	moveComponent = new MoveComponent(this);
@@ -16,8 +16,8 @@ FPSActor::FPSActor() :
 
 	FPSModel = new Actor();
 	FPSModel->setScale(0.75f);
-	meshComponent = new MeshComponent(FPSModel);
-	meshComponent->setMesh(Assets::getMesh("Mesh_Rifle"));
+	mesh1Component = new MeshComponent(FPSModel);
+	mesh1Component->setMesh(Assets::getMesh("Mesh_Rifle"));
 }
 
 void FPSActor::updateActor(float dt)
@@ -96,5 +96,5 @@ void FPSActor::actorInput(const InputState& inputState)
 
 void FPSActor::setVisible(bool isVisible)
 {
-	meshComponent->setVisible(isVisible);
+	mesh1Component->setVisible(isVisible);
 }

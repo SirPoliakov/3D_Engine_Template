@@ -7,6 +7,7 @@
 #include "MeshComponent.h"
 #include "FPSActor.h"
 #include "Cube.h"
+#include "Car.h"
 #include "Sphere.h"
 #include "Plane.h"
 
@@ -42,9 +43,15 @@ void Game::load()
 	Assets::loadMesh("Res\\Meshes\\Plane.gpmesh", "Mesh_Plane");
 	Assets::loadMesh("Res\\Meshes\\Sphere.gpmesh", "Mesh_Sphere");
 	Assets::loadMesh("Res\\Meshes\\Rifle.gpmesh", "Mesh_Rifle");
-	//Assets::loadMesh("Res\\Meshes\\RacingCar.gpmesh", "Mesh_RacingCar");
+	Assets::loadMesh("Res\\Meshes\\RacingCar.gpmesh", "Mesh_RacingCar");
+
+
 
 	fps = new FPSActor();
+
+	/*Car* myCar = new Car();
+	myCar->setPosition(Vector3(0.0f, 500.0f,-100.0f));
+	myCar->setScale(1.0f);*/
 
 	Cube* a = new Cube();
 	a->setPosition(Vector3(200.0f, 105.0f, 0.0f));
