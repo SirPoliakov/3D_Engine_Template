@@ -22,23 +22,28 @@ bool Game::initialize()
 
 void Game::load()
 {
+	inputSystem.setMouseRelativeMode(true);
+
 	Assets::loadShader("Res\\Shaders\\Sprite.vert", "Res\\Shaders\\Sprite.frag", "", "", "", "Sprite");
+	//Assets::loadShader("Res\\Shaders\\Phong.vert", "Res\\Shaders\\Phong.frag", "", "", "", "Phong");
 	Assets::loadShader("Res\\Shaders\\BasicMesh.vert", "Res\\Shaders\\BasicMesh.frag", "", "", "", "BasicMesh");
 
-	//Assets::loadTexture(renderer, "Res\\Textures\\Default.png", "Default");
-	Assets::loadTexture(renderer, "Res\\Textures\\Default.png", "Cube");
-	//Assets::loadTexture(renderer, "Res\\Textures\\HealthBar.png", "HealthBar");
+	Assets::loadTexture(renderer, "Res\\Textures\\Default.png", "Default");
+	Assets::loadTexture(renderer, "Res\\Textures\\Cube.png", "Cube");
+	Assets::loadTexture(renderer, "Res\\Textures\\HealthBar.png", "HealthBar");
 	Assets::loadTexture(renderer, "Res\\Textures\\Plane.png", "Plane");
-	//Assets::loadTexture(renderer, "Res\\Textures\\Radar.png", "Radar");
+	Assets::loadTexture(renderer, "Res\\Textures\\Radar.png", "Radar");
 	Assets::loadTexture(renderer, "Res\\Textures\\Sphere.png", "Sphere");
-	Assets::loadTexture(renderer, "Res\\Textures\\Rifle.png", "Rifle");
 	Assets::loadTexture(renderer, "Res\\Textures\\Crosshair.png", "Crosshair");
+	Assets::loadTexture(renderer, "Res\\Textures\\RacingCar.png", "RacingCar");
+	Assets::loadTexture(renderer, "Res\\Textures\\Rifle.png", "Rifle");
 
 	Assets::loadMesh("Res\\Meshes\\Cube.gpmesh", "Mesh_Cube");
 	Assets::loadMesh("Res\\Meshes\\Plane.gpmesh", "Mesh_Plane");
 	Assets::loadMesh("Res\\Meshes\\Sphere.gpmesh", "Mesh_Sphere");
 	Assets::loadMesh("Res\\Meshes\\Rifle.gpmesh", "Mesh_Rifle");
-	
+	//Assets::loadMesh("Res\\Meshes\\RacingCar.gpmesh", "Mesh_RacingCar");
+
 	fps = new FPSActor();
 
 	Cube* a = new Cube();
@@ -91,8 +96,8 @@ void Game::load()
 		p->setPosition(Vector3(-start + size, start + i * size, 0.0f));
 		p->setRotation(q);
 	}
-
-	/* Setup lights
+	/*
+	// Setup lights
 	renderer.setAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
 	DirectionalLight& dir = renderer.getDirectionalLight();
 	dir.direction = Vector3(0.0f, -0.707f, -0.707f);
@@ -112,9 +117,10 @@ void Game::load()
 	crosshairActor->setScale(2.0f);
 	crosshair = new SpriteComponent(crosshairActor, Assets::getTexture("Crosshair"));
 
+	/*
 	// Start music
-	//musicEvent = audioSystem.playEvent("event:/Music");
-
+	musicEvent = audioSystem.playEvent("event:/Music");
+	*/
 }
 
 void Game::processInput()

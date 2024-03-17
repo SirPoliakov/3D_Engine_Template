@@ -57,7 +57,7 @@ void FPSActor::actorInput(const InputState& inputState)
 	{
 		strafeSpeed -= 400.0f;
 	}
-	if (inputState.keyboard.getKeyValue(SDL_SCANCODE_A))
+	if (inputState.keyboard.getKeyValue(SDL_SCANCODE_D))
 	{
 		strafeSpeed += 400.0f;
 	}
