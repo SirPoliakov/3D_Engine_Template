@@ -93,13 +93,13 @@
     <ClInclude Include="MeshComponent.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.h">
+    <ClInclude Include="CubeActor.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Sphere.h">
+    <ClInclude Include="SphereActor.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Plane.h">
+    <ClInclude Include="PlaneActor.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="DirectionalLight.h">
@@ -121,15 +121,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="FPSActor.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Car.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="LineSegment.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -206,13 +197,7 @@
     <ClCompile Include="MeshComponent.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Cube.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Plane.cpp">
+    <ClCompile Include="SphereActor.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
@@ -233,13 +218,10 @@
     <ClCompile Include="FPSActor.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Car.cpp">
+    <ClCompile Include="CubeActor.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="LineSegment.cpp">
+    <ClCompile Include="PlaneActor.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

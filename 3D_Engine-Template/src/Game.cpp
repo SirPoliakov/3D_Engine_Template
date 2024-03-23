@@ -6,10 +6,10 @@
 #include "Assets.h"
 #include "MeshComponent.h"
 #include "FPSActor.h"
-#include "Cube.h"
+#include "CubeActor.h"
 #include "Car.h"
-#include "Sphere.h"
-#include "Plane.h"
+#include "SphereActor.h"
+#include "PlaneActor.h"
 #include <algorithm>
 
 
@@ -30,12 +30,12 @@ void Game::load()
 	//Assets::loadShader("Res\\Shaders\\Phong.vert", "Res\\Shaders\\Phong.frag", "", "", "", "Phong");
 	Assets::loadShader("Res\\Shaders\\BasicMesh.vert", "Res\\Shaders\\BasicMesh.frag", "", "", "", "BasicMesh");
 
-	Assets::loadTexture(renderer, "Res\\Textures\\Default.png", "Default");
+	//Assets::loadTexture(renderer, "Res\\Textures\\Default.png", "Default");
 	Assets::loadTexture(renderer, "Res\\Textures\\Cube.png", "Cube");
 	Assets::loadTexture(renderer, "Res\\Textures\\HealthBar.png", "HealthBar");
 	Assets::loadTexture(renderer, "Res\\Textures\\Plane.png", "Plane");
 	Assets::loadTexture(renderer, "Res\\Textures\\Radar.png", "Radar");
-	Assets::loadTexture(renderer, "Res\\Textures\\Sphere.png", "Sphere");
+	Assets::loadTexture(renderer, "Res\\Textures\\Default.png", "Sphere");
 	Assets::loadTexture(renderer, "Res\\Textures\\Crosshair.png", "Crosshair");
 	Assets::loadTexture(renderer, "Res\\Textures\\RacingCar.png", "RacingCar");
 	Assets::loadTexture(renderer, "Res\\Textures\\Rifle.png", "Rifle");
@@ -54,14 +54,14 @@ void Game::load()
 	myCar->setPosition(Vector3(0.0f, 500.0f,-100.0f));
 	myCar->setScale(1.0f);*/
 
-	Cube* a = new Cube();
+	CubeActor* a = new CubeActor();
 	a->setPosition(Vector3(200.0f, 105.0f, 0.0f));
 	a->setScale(100.0f);
 	Quaternion q(Vector3::unitY, -Maths::piOver2);
 	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 4.0f));
 	a->setRotation(q);
 
-	Sphere* b = new Sphere();
+	SphereActor* b = new SphereActor();
 	b->setPosition(Vector3(200.0f, -75.0f, 0.0f));
 	b->setScale(3.0f);
 
@@ -74,7 +74,7 @@ void Game::load()
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			Plane* p = new Plane();
+			PlaneActor* p = new PlaneActor();
 			p->setPosition(Vector3(start + i * size, start + j * size, -100.0f));
 		}
 	}
@@ -83,11 +83,11 @@ void Game::load()
 	q = Quaternion(Vector3::unitX, Maths::piOver2);
 	for (int i = 0; i < 10; i++)
 	{
-		Plane* p = new Plane();
+		PlaneActor* p = new PlaneActor();
 		p->setPosition(Vector3(start + i * size, start - size, 0.0f));
 		p->setRotation(q);
 
-		p = new Plane();
+		p = new PlaneActor();
 		p->setPosition(Vector3(start + i * size, -start + size, 0.0f));
 		p->setRotation(q);
 	}
@@ -96,11 +96,11 @@ void Game::load()
 	// Forward/back walls
 	for (int i = 0; i < 10; i++)
 	{
-		Plane* p = new Plane();
+		PlaneActor* p = new PlaneActor();
 		p->setPosition(Vector3(start - size, start + i * size, 0.0f));
 		p->setRotation(q);
 
-		p = new Plane();
+		p = new PlaneActor();
 		p->setPosition(Vector3(-start + size, start + i * size, 0.0f));
 		p->setRotation(q);
 	}
