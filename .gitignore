@@ -384,9 +384,6 @@ FodyWeavers.xsd
 !.vscode/extensions.json
 *.code-workspace
 
-# VS
-*.dll
-3D_Engine-Template/src/src.vcxproj
 
 # Local History for Visual Studio Code
 .history/
@@ -400,3 +397,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# VS
+*.dll
+3D_Engine-Template/src/src.vcxproj
+
