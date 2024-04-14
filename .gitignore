@@ -402,3 +402,4 @@ FodyWeavers.xsd
 *.dll
 3D_Engine-Template/src/src.vcxproj
 
+New/3DEngine/3DEngineSrc/Res
