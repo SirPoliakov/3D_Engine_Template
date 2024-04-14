@@ -35,22 +35,22 @@ void InputComponent::processInput(const struct InputState& inputState)
 	if (inputState.keyboard.getKeyState(clockwiseKey) == ButtonState::Held)
 	{
 		angularSpeed -= maxAngularSpeed;
-		setAngularSpeed(Vector2(angularSpeed,0.0f));
+		//setAngularSpeed(Vector2(angularSpeed,0.0f));
 	}
 	if (inputState.keyboard.getKeyState(counterClockwiseKey) == ButtonState::Held)
 	{
 		angularSpeed += maxAngularSpeed;
-		setAngularSpeed(Vector2(angularSpeed, 0.0f));
+		//setAngularSpeed(Vector2(angularSpeed, 0.0f));
 	}
 	if (inputState.keyboard.getKeyState(pitchUpKey) == ButtonState::Held)
 	{
 		angularSpeed -= maxAngularSpeed;
-		setAngularSpeed(Vector2(0.0f, angularSpeed));
+		//setAngularSpeed(Vector2(0.0f, angularSpeed));
 	}
 	if (inputState.keyboard.getKeyState(pitchDownKey) == ButtonState::Held)
 	{
 		angularSpeed += maxAngularSpeed;
-		setAngularSpeed(Vector2(0.0f, angularSpeed));;
+		//setAngularSpeed(Vector2(0.0f, angularSpeed));;
 	}
 }
 

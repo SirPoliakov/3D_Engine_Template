@@ -13,7 +13,7 @@ public:
 
 	void processInput(const struct InputState& inputState);
 
-	void setMaxVelocity(Vector3 _maxVelocity);
+	void setMaxForwardSpeed(float _maxVelocity);
 	void setMaxAngularSpeed(float maxAngularSpeedP);
 	void setForwardKey(SDL_Scancode key);
 	void setBackKey(SDL_Scancode key);
@@ -26,7 +26,7 @@ public:
 
 
 private:
-	float maxVelocityScale;
+	float maxForwardSpeed;
 	float maxAngularSpeed;
 
 	// ZQSD moves
