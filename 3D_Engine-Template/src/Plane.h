@@ -1,8 +1,14 @@
 #pragma once
-#include "Actor.h"
+#include "Vector3.h"
 
-class Plane : public Actor
+struct Plane
 {
-public:
-	Plane();
+	Plane(const Vector3& normal, float d);
+	Plane(const Vector3& a, const Vector3& b, const Vector3& c);
+
+	float signedDist(const Vector3 point) const;
+
+	// Minimal dist between plane and origin
+	float d;
+	Vector3 normal;
 };

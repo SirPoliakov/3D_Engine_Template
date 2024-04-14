@@ -96,10 +96,10 @@
     <ClInclude Include="Cube.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Sphere.h">
+    <ClInclude Include="SphereActor.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Plane.h">
+    <ClInclude Include="PlaneActor.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="DirectionalLight.h">
@@ -123,13 +123,7 @@
     <ClInclude Include="FPSActor.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Car.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="LineSegment.h">
+    <ClInclude Include="Plane.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -209,10 +203,10 @@
     <ClCompile Include="Cube.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Sphere.cpp">
+    <ClCompile Include="SphereActor.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Plane.cpp">
+    <ClCompile Include="PlaneActor.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
@@ -233,13 +227,7 @@
     <ClCompile Include="FPSActor.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Car.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="LineSegment.cpp">
+    <ClCompile Include="Plane.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
