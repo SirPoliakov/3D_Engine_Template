@@ -403,3 +403,4 @@ FodyWeavers.xsd
 3D_Engine-Template/src/src.vcxproj
 
 New/3DEngine/3DEngineSrc/Res
+New/3DEngine/SDL

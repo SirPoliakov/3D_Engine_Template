@@ -1,7 +1,7 @@
 #include "Mesh.h"
 #include "VertexArray.h"
 
-Mesh::Mesh() : vertexArray(nullptr), shaderName(""), radius(0.0f)
+Mesh::Mesh() : vertexArray(nullptr), shaderName(""), radius(0.0f), box(Vector3::infinity, Vector3::negInfinity)
 {
 }
 
@@ -45,4 +45,9 @@ void Mesh::setShaderName(const string& shaderNameP)
 void Mesh::setRadius(float radiusP)
 {
 	radius = radiusP;
+}
+
+void Mesh::setBox(const AABB& boxP)
+{
+	box = boxP;
 }

@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "Texture.h"
+#include "AABB.h"
 
 using std::string;
 using std::vector;
@@ -17,6 +18,7 @@ public:
 	class VertexArray* getVertexArray() { return vertexArray; }
 	const string& getShaderName() const { return shaderName; }
 	float getRadius() const { return radius; }
+	const AABB& getBox() const { return box; }
 
 	void addTexture(Texture* texture);
 	Texture* getTexture(int index);
@@ -24,11 +26,14 @@ public:
 	void setVertexArray(VertexArray* vertexArrayP);
 	void setShaderName(const string& shaderNameP);
 	void setRadius(float radiusP);
+	void setBox(const AABB& boxP);
 
 private:
 	vector<Texture*> textures;
 	class VertexArray* vertexArray;
 	string shaderName;
 	float radius; // Bounding sphere radius
+	AABB box;
+
 };
 
