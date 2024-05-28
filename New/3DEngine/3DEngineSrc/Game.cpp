@@ -31,7 +31,7 @@ void Game::load()
 	Assets::loadShader("Res\\Shaders\\BasicMesh.vert", "Res\\Shaders\\BasicMesh.frag", "", "", "", "BasicMesh");
 
 	//Assets::loadTexture(renderer, "Res\\Textures\\Default.png", "Default");
-	Assets::loadTexture(renderer, "Res\\Textures\\Cube.png", "Cube");
+	Assets::loadTexture(renderer, "Res\\Textures\\Plane.png", "Cube");
 	Assets::loadTexture(renderer, "Res\\Textures\\HealthBar.png", "HealthBar");
 	Assets::loadTexture(renderer, "Res\\Textures\\Plane.png", "Plane");
 	Assets::loadTexture(renderer, "Res\\Textures\\Radar.png", "Radar");
@@ -50,15 +50,15 @@ void Game::load()
 
 	fps = new FPSActor();
 
-	/*Car* myCar = new Car();
-	myCar->setPosition(Vector3(0.0f, 500.0f,-100.0f));
-	myCar->setScale(1.0f);*/
+	Car* myCar = new Car();
+	myCar->setPosition(Vector3(-1000.0f, 500.0f,-100.0f));
+	myCar->setScale(1.0f);
 
 	CubeActor* a = new CubeActor();
-	a->setPosition(Vector3(200.0f, 105.0f, 0.0f));
+	a->setPosition(Vector3(1000.0f, 1000, 0.0f));
 	a->setScale(100.0f);
 	Quaternion q(Vector3::unitY, -Maths::piOver2);
-	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 4.0f));
+	//q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 4.0f));
 	a->setRotation(q);
 
 	SphereActor* b = new SphereActor();
@@ -70,9 +70,9 @@ void Game::load()
 	// Setup floor
 	const float start = -1250.0f;
 	const float size = 250.0f;
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 20; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 20; j++)
 		{
 			PlaneActor* p = new PlaneActor();
 			p->setPosition(Vector3(start + i * size, start + j * size, -100.0f));
@@ -81,7 +81,7 @@ void Game::load()
 
 	// Left/right walls
 	q = Quaternion(Vector3::unitX, Maths::piOver2);
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		PlaneActor* p = new PlaneActor();
 		p->setPosition(Vector3(start + i * size, start - size, 0.0f));
@@ -94,7 +94,7 @@ void Game::load()
 
 	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::piOver2));
 	// Forward/back walls
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		PlaneActor* p = new PlaneActor();
 		p->setPosition(Vector3(start - size, start + i * size, 0.0f));
