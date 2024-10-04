@@ -1,7 +1,7 @@
 #include "Mesh.h"
 #include "VertexArray.h"
 
-Mesh::Mesh() : vertexArray(nullptr), shaderName(""), radius(0.0f), box(Vector3::infinity, Vector3::negInfinity)
+Mesh::Mesh() : vertexArray(nullptr), shaderName(""), radius(0.0f)//, box(Vector3::infinity, Vector3::negInfinity)
 {
 }
 
@@ -20,7 +20,7 @@ void Mesh::addTexture(Texture* texture)
 	textures.emplace_back(texture);
 }
 
-Texture* Mesh::getTexture(int index)
+Texture* Mesh::getTexture(size_t index)
 {
 	if (index < textures.size())
 	{
@@ -47,7 +47,7 @@ void Mesh::setRadius(float radiusP)
 	radius = radiusP;
 }
 
-void Mesh::setBox(const AABB& boxP)
-{
-	box = boxP;
-}
+//void Mesh::setBox(const AABB& boxP)
+//{
+//	box = boxP;
+//}

@@ -123,7 +123,7 @@ Mesh Assets::loadMeshFromFile(const string& filename)
     std::vector<float> vertices;
     vertices.reserve(vertsJson.Size() * vertSize);
     float radius = 0.0f;
-    AABB box = AABB(Vector3::infinity, Vector3::negInfinity);
+    //AABB box = AABB(Vector3::infinity, Vector3::negInfinity);
     for (rapidjson::SizeType i = 0; i < vertsJson.Size(); i++)
     {
         // For now, just assume we have 8 elements
@@ -147,7 +147,7 @@ Mesh Assets::loadMeshFromFile(const string& filename)
 
     // We were computing length squared earlier
     mesh.setRadius(Maths::sqrt(radius));
-    mesh.setBox(box);
+    //mesh.setBox(box);
 
     // Load in the indices
     const rapidjson::Value& indJson = doc["indices"];
@@ -159,7 +159,7 @@ Mesh Assets::loadMeshFromFile(const string& filename)
     }
 
     std::vector<unsigned int> indices;
-    indices.reserve(indJson.Size() * 3.0);
+    indices.reserve(static_cast<unsigned __int64>(indJson.Size() * 3.0));
     for (rapidjson::SizeType i = 0; i < indJson.Size(); i++)
     {
         const rapidjson::Value& ind = indJson[i];
@@ -176,7 +176,7 @@ Mesh Assets::loadMeshFromFile(const string& filename)
     }
 
     // Now create a vertex array
-    mesh.setVertexArray(new VertexArray(vertices.data(), static_cast<unsigned int>(vertices.size()) / vertSize, indices.data(), static_cast<unsigned int>(indices.size())));
+    mesh.setVertexArray(new VertexArray(vertices.data(), static_cast<unsigned int>(vertices.size()) / static_cast<unsigned int>(vertSize), indices.data(), static_cast<unsigned int>(indices.size())));
 
     Log::info("Loaded mesh " + filename);
 
