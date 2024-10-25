@@ -28,6 +28,16 @@ public:
 	void addMesh(class MeshComponent* mesh);
 	void removeMesh(class MeshComponent* mesh);
 
+	// Given a screen space point, unprojects it into world space,
+	// based on the current 3D view/projection matrices
+	// Expected ranges:
+	// x = [-screenWidth/2, +screenWidth/2]
+	// y = [-screenHeight/2, +screenHeight/2]
+	// z = [0, 1) -- 0 is closer to camera, 1 is further
+	Vector3 unproject(const Vector3& screenPoint) const;
+
+	void getScreenDirection(Vector3& outStart, Vector3& outDir) const;
+
 	void setViewMatrix(const Matrix4& viewP);
 
 private:

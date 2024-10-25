@@ -12,6 +12,7 @@ public:
 	void actorInput(const struct InputState& inputState) override;
 
 	void setVisible(bool isVisible);
+	void shoot();
 
 
 private:

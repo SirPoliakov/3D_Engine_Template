@@ -14,6 +14,8 @@ public:
 
 	int getUpdateOrder() const { return updateOrder; }
 
+	class Actor* getOwner();
+
 	virtual void processInput(const struct InputState& inputState);
 	virtual void update(float dt);
 	virtual void onUpdateWorldTransform() {}

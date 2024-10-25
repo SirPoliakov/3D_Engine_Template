@@ -22,8 +22,8 @@ Plane::Plane(const Vector3& a, const Vector3& b, const Vector3& c)
 
 	//  --> N = (n1, n2, n3) est la normale au plan.
 
-	//  --> d la distance (en float) entre l'origine et le point du plan 
-	//      le plus proche, autrement dit la distance à l'origine la plus 
+	//  --> d la distance (en float) entre l'origine et le point du plan
+	//      le plus proche, autrement dit la distance à l'origine la plus
 	//		courte du plan
 
 	d = -Vector3::dot(a, normal);

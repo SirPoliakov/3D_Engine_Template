@@ -30,8 +30,8 @@ void Game::load()
 	//Assets::loadShader("Res\\Shaders\\Phong.vert", "Res\\Shaders\\Phong.frag", "", "", "", "Phong");
 	Assets::loadShader("Res\\Shaders\\BasicMesh.vert", "Res\\Shaders\\BasicMesh.frag", "", "", "", "BasicMesh");
 
-	//Assets::loadTexture(renderer, "Res\\Textures\\Default.png", "Default");
-	Assets::loadTexture(renderer, "Res\\Textures\\Plane.png", "Cube");
+	Assets::loadTexture(renderer, "Res\\Textures\\Target.png", "Target");
+	Assets::loadTexture(renderer, "Res\\Textures\\Cube.png", "Cube");
 	Assets::loadTexture(renderer, "Res\\Textures\\HealthBar.png", "HealthBar");
 	Assets::loadTexture(renderer, "Res\\Textures\\Plane.png", "Plane");
 	Assets::loadTexture(renderer, "Res\\Textures\\Radar.png", "Radar");
@@ -41,6 +41,7 @@ void Game::load()
 	Assets::loadTexture(renderer, "Res\\Textures\\Rifle.png", "Rifle");
 
 	Assets::loadMesh("Res\\Meshes\\Cube.gpmesh", "Mesh_Cube");
+	Assets::loadMesh("Res\\Meshes\\Target.gpmesh", "Mesh_Target");
 	Assets::loadMesh("Res\\Meshes\\Plane.gpmesh", "Mesh_Plane");
 	Assets::loadMesh("Res\\Meshes\\Sphere.gpmesh", "Mesh_Sphere");
 	Assets::loadMesh("Res\\Meshes\\Rifle.gpmesh", "Mesh_Rifle");
@@ -104,6 +105,15 @@ void Game::load()
 		p->setPosition(Vector3(-start + size, start + i * size, 0.0f));
 		p->setRotation(q);
 	}
+
+	TargetActor* t = new TargetActor();
+	t->setPosition(Vector3(1450.0f, 0.0f, 100.0f));
+	t = new TargetActor();
+	t->setPosition(Vector3(1450.0f, 0.0f, 400.0f));
+	t = new TargetActor();
+	t->setPosition(Vector3(1450.0f, -500.0f, 200.0f));
+	t = new TargetActor();
+	t->setPosition(Vector3(1450.0f, 500.0f, 200.0f));
 	/*
 	// Setup lights
 	renderer.setAmbientLight(Vector3(0.2f, 0.2f, 0.2f));
@@ -120,10 +130,10 @@ void Game::load()
 	ac->playEvent("event:/FireLoop");
 	*/
 
-	// Corsshair
-	Actor* crosshairActor = new Actor();
-	crosshairActor->setScale(2.0f);
-	crosshair = new SpriteComponent(crosshairActor, Assets::getTexture("Crosshair"));
+	//// Corsshair
+	//Actor* crosshairActor = new Actor();
+	//crosshairActor->setScale(2.0f);
+	//crosshair = new SpriteComponent(crosshairActor, Assets::getTexture("Crosshair"));
 
 	/*
 	// Start music
@@ -197,6 +207,17 @@ void Game::render()
 	renderer.beginDraw();
 	renderer.draw();
 	renderer.endDraw();
+}
+
+void Game::addPlane(PlaneActor* plane)
+{
+	planes.emplace_back(plane);
+}
+
+void Game::removePlane(PlaneActor* plane)
+{
+	auto iter = std::find(begin(planes), end(planes), plane);
+	planes.erase(iter);
 }
 
 void Game::loop()

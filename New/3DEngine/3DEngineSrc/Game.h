@@ -6,6 +6,9 @@
 #include "Vector2.h"
 #include "RendererOGL.h"
 #include "InputSystem.h"
+#include "PhysicsSystem.h"
+#include "TargetActor.h"
+#include "PlaneActor.h"
 
 using std::vector;
 
@@ -23,6 +26,8 @@ public:
 	Game(Game&&) = delete;
 	Game& operator=(Game&&) = delete;
 
+	PhysicsSystem& getPhysicsSystem() { return physicsSystem; }
+
 private:
 	Game() : isRunning(true), isUpdatingActors(false), fps(nullptr), crosshair(nullptr) {}
 
@@ -37,6 +42,11 @@ public:
 	void removeActor(Actor* actor);
 
 	RendererOGL& getRenderer() { return renderer; }
+	
+	//Game Specific
+	void addPlane(class PlaneActor* plane);
+	void removePlane(class PlaneActor* plane);
+	vector<PlaneActor*>& getPlanes() { return planes; }
 
 private:
 	void processInput();
@@ -50,13 +60,14 @@ private:
 	//Game Specific
 	class FPSActor* fps;
 	class SpriteComponent* crosshair;
+	
 
 	bool isUpdatingActors;
 	vector<Actor*> actors;
 	vector<Actor*> pendingActors;
 	InputSystem inputSystem;
-	
+	PhysicsSystem physicsSystem;
 
-
+	vector<PlaneActor*> planes;
 };
 

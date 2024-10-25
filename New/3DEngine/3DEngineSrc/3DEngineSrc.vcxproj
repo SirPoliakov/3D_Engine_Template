@@ -132,11 +132,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AnimSpriteComponent.cpp" />
     <ClCompile Include="Assets.cpp" />
+    <ClCompile Include="BallActor.cpp" />
+    <ClCompile Include="BallMoveComponent.cpp" />
+    <ClCompile Include="BoxComponent.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Car.cpp" />
+    <ClCompile Include="Collisions.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CubeActor.cpp" />
     <ClCompile Include="FPSActor.cpp" />
@@ -153,6 +158,7 @@
     <ClCompile Include="MeshComponent.cpp" />
     <ClCompile Include="MouseState.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="PhysicsSystem.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="PlaneActor.cpp" />
     <ClCompile Include="Quaternion.cpp" />
@@ -163,6 +169,7 @@
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereActor.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
+    <ClCompile Include="TargetActor.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Vector2.cpp" />
@@ -171,11 +178,16 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="Actor.h" />
     <ClInclude Include="AnimSpriteComponent.h" />
     <ClInclude Include="Assets.h" />
+    <ClInclude Include="BallActor.h" />
+    <ClInclude Include="BallMoveComponent.h" />
+    <ClInclude Include="BoxComponent.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Car.h" />
+    <ClInclude Include="Collisions.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CubeActor.h" />
     <ClInclude Include="DirectionalLight.h" />
@@ -194,6 +206,7 @@
     <ClInclude Include="MeshComponent.h" />
     <ClInclude Include="MouseState.h" />
     <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="PhysicsSystem.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="PlaneActor.h" />
     <ClInclude Include="Quaternion.h" />
@@ -204,6 +217,7 @@
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphereActor.h" />
     <ClInclude Include="SpriteComponent.h" />
+    <ClInclude Include="TargetActor.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Vector2.h" />

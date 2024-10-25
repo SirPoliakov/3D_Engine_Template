@@ -13,6 +13,13 @@ Component::~Component()
 	owner.removeComponent(this);
 }
 
+
+
+Actor* Component::getOwner()
+{
+	return &owner;
+}
+
 void Component::processInput(const struct InputState& inputState)
 {
 }
