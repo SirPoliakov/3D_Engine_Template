@@ -3,6 +3,8 @@
 #include "Vector3.h"
 
 
+
+
 class FPSActor : Actor
 {
 public:
@@ -13,6 +15,7 @@ public:
 
 	void setVisible(bool isVisible);
 	void shoot();
+	void fixCollisions();
 
 
 private:
@@ -20,6 +23,7 @@ private:
 	class MeshComponent* mesh1Component;
 	class FPSCamera* cameraComponent;
 	class Actor* FPSModel;
+	class BoxComponent* boxComponent;
 };
 
 const Vector3 MODEL_OFFSET = Vector3(10.0f, 35.0f, -15.0f);

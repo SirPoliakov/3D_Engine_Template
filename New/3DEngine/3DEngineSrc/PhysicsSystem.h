@@ -26,6 +26,8 @@ public:
 	void addBox(class BoxComponent* box);
 	void removeBox(class BoxComponent* box);
 	bool segmentCast(const LineSegment& l, CollisionInfo& outColl);
+	// Test collisions using sweep and prune
+	void testSweepAndPrune(std::function<void(class Actor*, class Actor*)> f);
 
 private:
 	vector<class BoxComponent*> boxes;

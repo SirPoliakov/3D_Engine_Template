@@ -5,12 +5,15 @@
 #include "FPSCamera.h"
 #include "BallActor.h"
 #include "Assets.h"
+#include "BoxComponent.h"
+#include "Collisions.h"
 
 FPSActor::FPSActor() :
 	Actor(),
 	moveComponent(nullptr),
 	mesh1Component(nullptr),
-	cameraComponent(nullptr)
+	cameraComponent(nullptr),
+	boxComponent(nullptr)
 {
 	moveComponent = new MoveComponent(this);
 	cameraComponent = new FPSCamera(this);
@@ -19,6 +22,11 @@ FPSActor::FPSActor() :
 	FPSModel->setScale(0.75f);
 	mesh1Component = new MeshComponent(FPSModel);
 	mesh1Component->setMesh(Assets::getMesh("Mesh_Rifle"));
+
+	boxComponent = new BoxComponent(this);
+	AABB collision(Vector3(-25.0f, -25.0f, -87.5f), Vector3(25.0f, 25.0f, 87.5f));
+	boxComponent->setObjectBox(collision);
+	boxComponent->setShouldRotate(false);
 }
 
 void FPSActor::updateActor(float dt)
@@ -39,6 +47,7 @@ void FPSActor::updateActor(float dt)
 	Quaternion q = getRotation();
 	q = Quaternion::concatenate(q, Quaternion(getRight(), cameraComponent->getPitch()));
 	FPSModel->setRotation(q);
+	fixCollisions();
 }
 
 void FPSActor::actorInput(const InputState& inputState)
@@ -129,4 +138,57 @@ void FPSActor::shoot()
 
 	// Rotate the ball to face new direction
 	ball->rotateToNewForward(dir);
+}
+
+void FPSActor::fixCollisions()
+{
+	// Need to recompute world transform to update world box
+	computeWorldTransform();
+	const AABB& playerBox = boxComponent->getWorldBox();
+	Vector3 pos = getPosition();
+	auto& planes = getGame().getPlanes();
+	for (auto pa : planes)
+	{
+		// Do we collide with this PlaneActor?
+		const AABB& planeBox = pa->getBox()->getWorldBox();
+		if (Collisions::intersect(playerBox, planeBox))
+		{
+			// Calculate all our differences
+			float dx1 = planeBox.max.x - playerBox.min.x;
+			float dx2 = planeBox.min.x - playerBox.max.x;
+			float dy1 = planeBox.max.y - playerBox.min.y;
+			float dy2 = planeBox.min.y - playerBox.max.y;
+			float dz1 = planeBox.max.z - playerBox.min.z;
+			float dz2 = planeBox.min.z - playerBox.max.z;
+
+			// Set dx to whichever of dx1/dx2 have a lower abs
+			float dx = Maths::abs(dx1) < Maths::abs(dx2) ? dx1 : dx2;
+
+			// same for dy
+			float dy = Maths::abs(dy1) < Maths::abs(dy2) ? dy1 : dy2;
+
+			// same for dz
+			float dz = Maths::abs(dz1) < Maths::abs(dz2) ? dz1 : dz2;
+
+			// Whichever is closest, adjust x/y position
+			if (Maths::abs(dx) <= Maths::abs(dy) && Maths::abs(dx) <=
+				Maths::abs(dz))
+			{
+				pos.x += dx;
+			}
+			else if (Maths::abs(dy) <= Maths::abs(dx) && Maths::abs(dy) <=
+				Maths::abs(dz))
+			{
+				pos.y += dy;
+			}
+			else
+			{
+				pos.z += dz;
+			}
+
+			// Need to set position and update box component
+			setPosition(pos);
+			boxComponent->onUpdateWorldTransform();
+		}
+	}
 }
